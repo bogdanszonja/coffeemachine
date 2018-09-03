@@ -1,4 +1,4 @@
-package com.codecool.coffee;
+package com.codecool.coffee.coffeshop;
 
 public enum Room {
     WHITE,
