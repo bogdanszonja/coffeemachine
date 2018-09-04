@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 
 @WebServlet(urlPatterns = {"/"})
 public class WebController extends HttpServlet {
@@ -33,10 +33,9 @@ public class WebController extends HttpServlet {
 
         String coffeeType = request.getParameter("coffeeType");
         String customerName = request.getParameter("customerName");
-        String orderTime = request.getParameter("orderTime");
         String customerRoom = request.getParameter("customerRoom");
-        
-        Order order = new Order(customerName, Coffee.valueOf(coffeeType), Date.valueOf(orderTime), Room.valueOf(customerRoom));
+
+        Order order = new Order(customerName, Coffee.valueOf(coffeeType), new Date(), Room.valueOf(customerRoom));
         SQLConnection.addNewOrder(order);
 
     }
