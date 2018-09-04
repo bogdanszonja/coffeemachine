@@ -1,6 +1,7 @@
 package com.codecool.coffee.webcontroller;
 
 import com.codecool.coffee.coffeshop.Coffee;
+import com.codecool.coffee.coffeshop.CoffeeMachine;
 import com.codecool.coffee.coffeshop.Order;
 import com.codecool.coffee.coffeshop.Room;
 import com.codecool.coffee.sql.SQLConnection;
@@ -24,6 +25,7 @@ import java.util.Deque;
 @WebServlet(urlPatterns = {"/admin"})
 public class Admin extends HttpServlet {
 
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
@@ -34,6 +36,7 @@ public class Admin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         response.setContentType("text/plain; charset=UTF-8");
 
         StringBuffer jb = new StringBuffer();
@@ -48,10 +51,20 @@ public class Admin extends HttpServlet {
 
         JSONObject requestJSONObject =  new JSONObject(jb.toString());
 
-        if(requestJSONObject.get("action").equals("get_orders")) {
+        String action = requestJSONObject.getString("action");
+        if(action.equals("get_orders")) {
             Deque<Order> allOrder = SQLConnection.getAllOrders();
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("orders", allOrder);
+            response.getWriter().write(jsonObject.toString());
+        } else if (action.equals("get_coffeemachine_levels")) {
+            int waterLevel = CoffeeMachine.getInstance().getWaterLevel();
+            int beanLevel = CoffeeMachine.getInstance().getCoffeeBeanLevel();
+            int groundLevel = CoffeeMachine.getInstance().getRemainingGroundLevel();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("water", waterLevel);
+            jsonObject.put("bean", beanLevel);
+            jsonObject.put("ground", groundLevel);
             response.getWriter().write(jsonObject.toString());
         }
     }
