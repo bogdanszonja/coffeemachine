@@ -37,31 +37,23 @@ public class Admin extends HttpServlet {
         response.setContentType("text/plain; charset=UTF-8");
 
         StringBuffer jb = new StringBuffer();
-        String line = null;
+        String line;
         try {
             BufferedReader reader = request.getReader();
             while ((line = reader.readLine()) != null)
                 jb.append(line);
-        } catch (Exception e) { /*report an error*/ }
-
-        try {
-            JSONObject requestJsonObject =  HTTP.toJSONObject(jb.toString());
-
-            if(requestJsonObject.get("action").equals("get_orders")) {
-
-                Deque<Order> allOrder = SQLConnection.getAllOrders();
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("orders", allOrder);
-
-                response.getWriter().write(jsonObject.toString());
-            }
-        } catch (JSONException e) {
-            // crash and burn
-            throw new IOException("Error parsing JSON request string");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
+        JSONObject requestJSONObject =  new JSONObject(jb.toString());
 
-
+        if(requestJSONObject.get("action").equals("get_orders")) {
+            Deque<Order> allOrder = SQLConnection.getAllOrders();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("orders", allOrder);
+            response.getWriter().write(jsonObject.toString());
+        }
     }
 
 }

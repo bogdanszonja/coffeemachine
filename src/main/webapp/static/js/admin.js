@@ -6,6 +6,8 @@ var fillOrders = function () {
     $.ajax({
         type: "POST",
         url: "/admin",
+        data: JSON.stringify({'actions': 'get_orders'}),
+        dataType: "json",
         success: function(data){
             var tableData = JSON.parse(data);
             for (var i in tableData['orders']){
