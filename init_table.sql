@@ -4,5 +4,6 @@ CREATE TABLE public.orders
     costumer_name varchar,
     costumer_room varchar,
     coffe_type varchar,
-    order_time timestamp
+    order_time timestamp,
+    completed boolean default false
 );
