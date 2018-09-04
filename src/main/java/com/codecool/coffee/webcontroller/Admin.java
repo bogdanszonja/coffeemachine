@@ -5,6 +5,8 @@ import com.codecool.coffee.coffeshop.Order;
 import com.codecool.coffee.coffeshop.Room;
 import com.codecool.coffee.sql.SQLConnection;
 import netscape.javascript.JSObject;
+import org.json.HTTP;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -14,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Deque;
 
@@ -33,11 +36,31 @@ public class Admin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/plain; charset=UTF-8");
 
-        Deque<Order> allOrder = SQLConnection.getAllOrders();
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("orders", allOrder);
+        StringBuffer jb = new StringBuffer();
+        String line = null;
+        try {
+            BufferedReader reader = request.getReader();
+            while ((line = reader.readLine()) != null)
+                jb.append(line);
+        } catch (Exception e) { /*report an error*/ }
 
-        response.getWriter().write(jsonObject.toString());
+        try {
+            JSONObject requestJsonObject =  HTTP.toJSONObject(jb.toString());
+
+            if(requestJsonObject.get("action").equals("get_orders")) {
+
+                Deque<Order> allOrder = SQLConnection.getAllOrders();
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("orders", allOrder);
+
+                response.getWriter().write(jsonObject.toString());
+            }
+        } catch (JSONException e) {
+            // crash and burn
+            throw new IOException("Error parsing JSON request string");
+        }
+
+
 
     }
 
