@@ -9,16 +9,16 @@ public class CoffeeMachine {
     private int maxBeanLevel = 100;
     private int groundsCapacity = 100;
 
-    static CoffeeMachine instance = new CoffeeMachine();
+    private static final CoffeeMachine instance = new CoffeeMachine();
 
     private CoffeeMachine() {
     }
 
-    public CoffeeMachine getInstance() {
+    public static CoffeeMachine getInstance() {
         return instance;
     }
 
-    private Coffee make(Coffee coffee) {
+    Coffee make(Coffee coffee) {
 
         waterLevel -= coffee.getRequiredWater();
         coffeeBeanLevel -= coffee.getRequiredCoffeeBean();
