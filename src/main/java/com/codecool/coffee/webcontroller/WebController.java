@@ -1,6 +1,10 @@
 package com.codecool.coffee.webcontroller;
 
 
+import com.codecool.coffee.coffeshop.Coffee;
+import com.codecool.coffee.coffeshop.Order;
+import com.codecool.coffee.coffeshop.Room;
+import com.codecool.coffee.sql.SQLConnection;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import javax.servlet.ServletException;
@@ -9,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 @WebServlet(urlPatterns = {"/"})
 public class WebController extends HttpServlet {
@@ -18,13 +23,21 @@ public class WebController extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
-        engine.process("product/index.html", context, response.getWriter());
+        engine.process("index.html", context, response.getWriter());
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/plain; charset=UTF-8");
         response.getWriter().write(1);
+
+        String coffeeType = request.getParameter("coffeeType");
+        String customerName = request.getParameter("customerName");
+        String customerRoom = request.getParameter("customerRoom");
+
+        Order order = new Order(customerName, Coffee.valueOf(coffeeType), new Date(), Room.valueOf(customerRoom));
+        SQLConnection.addNewOrder(order);
+
     }
 
 }
