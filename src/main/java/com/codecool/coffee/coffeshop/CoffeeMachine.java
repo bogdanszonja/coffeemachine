@@ -36,4 +36,16 @@ public class CoffeeMachine {
     }
 
     public void emptyGrounds() { remainingGroundLevel = groundsCapacity; }
+
+    public int getWaterLevel() {
+        return waterLevel;
+    }
+
+    public int getCoffeeBeanLevel() {
+        return coffeeBeanLevel;
+    }
+
+    public int getRemainingGroundLevel() {
+        return remainingGroundLevel;
+    }
 }
