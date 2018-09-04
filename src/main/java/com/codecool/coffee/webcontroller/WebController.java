@@ -29,11 +29,11 @@ public class WebController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/plain; charset=UTF-8");
-        response.getWriter().write(1);
+        System.out.println("Post get in");
 
-        String coffeeType = request.getParameter("coffeeType");
+        String coffeeType = request.getParameter("coffeeType").toUpperCase();
         String customerName = request.getParameter("customerName");
-        String customerRoom = request.getParameter("customerRoom");
+        String customerRoom = request.getParameter("customerRoom").toUpperCase();
 
         Order order = new Order(customerName, Coffee.valueOf(coffeeType), new Date(), Room.valueOf(customerRoom));
         SQLConnection.addNewOrder(order);

@@ -1,3 +1,3 @@
 $(":button").click(function () {
-    $("#costumerForm").append("<input type='text' value='" + $(this).attr("id") + "'/>").submit();
+    $("#customerForm").append("<input type='text' name='coffeeType' value='" + $(this).attr("id") + "'/>").submit();
 });
