@@ -1,8 +1,11 @@
 package com.codecool.coffee.sql;
 
 import com.codecool.coffee.coffeshop.Coffee;
+import com.codecool.coffee.coffeshop.CoffeeMachine;
 import com.codecool.coffee.coffeshop.Order;
 import com.codecool.coffee.coffeshop.Room;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayDeque;
@@ -10,9 +13,10 @@ import java.util.Date;
 import java.util.Deque;
 
 public class SQLConnection {
+    private static final Logger logger = LoggerFactory.getLogger(SQLConnection.class);
+
     private static final String JDBC_DRIVER = "org.postgresql.Driver";
     private static final String DB_URL = "jdbc:postgresql://localhost/" + System.getenv("db_name");
-
     private static final String USER = System.getenv("db_user");
     private static final String PASS = System.getenv("db_password");
 
@@ -23,6 +27,7 @@ public class SQLConnection {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
         } catch (SQLException|ClassNotFoundException e) {
             e.printStackTrace();
+            logger.warn("JDBC connection haven't been established");
         }
         return conn;
     }

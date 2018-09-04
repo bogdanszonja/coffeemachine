@@ -1,12 +1,16 @@
 package com.codecool.coffee.coffeshop;
 
 import com.codecool.coffee.sql.SQLConnection;
-import com.sun.org.apache.xpath.internal.operations.Or;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+
 public class Barista {
+
+    private static final Logger logger = LoggerFactory.getLogger(Barista.class);
 
     private Order currentOrder;
 
@@ -21,6 +25,7 @@ public class Barista {
     }
 
     public void maintainCoffeeMachine(Trouble trouble) {
+        logger.debug("maintainCoffeeMachine method called with Trouble type: {}.", trouble);
         if (trouble == Trouble.NOT_ENOUGH_COFFEE) {
             CoffeeMachine.getInstance().refillCoffeeBean();
         } else if (trouble == Trouble.NOT_ENOUGH_WATER) {

@@ -1,6 +1,12 @@
 package com.codecool.coffee.coffeshop;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class CoffeeMachine {
+
+    private static final Logger logger = LoggerFactory.getLogger(CoffeeMachine.class);
+
 
     private int waterLevel;
     private int coffeeBeanLevel;
@@ -19,6 +25,7 @@ public class CoffeeMachine {
     }
 
     Coffee make(Coffee coffee) {
+        logger.debug("make method called with Coffee type: {}.", coffee);
 
         waterLevel -= coffee.getRequiredWater();
         coffeeBeanLevel -= coffee.getRequiredCoffeeBean();
