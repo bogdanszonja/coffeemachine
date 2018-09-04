@@ -5,23 +5,35 @@ public class CoffeeMachine {
     private int waterLevel;
     private int coffeeBeanLevel;
     private int remainingGroundLevel;
-    private int maxWaterLevel;
-    private int maxBeanLevel;
-    private int groundsCapacity;
+    private int maxWaterLevel = 100;
+    private int maxBeanLevel = 100;
+    private int groundsCapacity = 100;
 
-    /*private Coffee make() {
-        //not implemented yet
-    }*/
+    static CoffeeMachine instance = new CoffeeMachine();
 
-    public void refillWater(int waterLevel) {
-        this.waterLevel = waterLevel;
+    private CoffeeMachine() {
     }
 
-    public void refillCoffeeBean(int coffeeBeanLevel) {
-        this.coffeeBeanLevel = coffeeBeanLevel;
+    public CoffeeMachine getInstance() {
+        return instance;
     }
 
-    public void emptyGrounds(int remainingGroundLevel) {
-        this.remainingGroundLevel = remainingGroundLevel;
+    private Coffee make(Coffee coffee) {
+
+        waterLevel -= coffee.getRequiredWater();
+        coffeeBeanLevel -= coffee.getRequiredCoffeeBean();
+        remainingGroundLevel -= coffee.getGroundMade();
+
+        return coffee;
     }
+
+    public void refillWater() {
+        waterLevel = maxWaterLevel;
+    }
+
+    public void refillCoffeeBean() {
+        coffeeBeanLevel = maxBeanLevel;
+    }
+
+    public void emptyGrounds() { remainingGroundLevel = groundsCapacity; }
 }
