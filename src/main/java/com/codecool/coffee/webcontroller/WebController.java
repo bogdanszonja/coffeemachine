@@ -18,7 +18,7 @@ public class WebController extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
-        engine.process("product/index.html", context, response.getWriter());
+        engine.process("index.html", context, response.getWriter());
     }
 
     @Override
