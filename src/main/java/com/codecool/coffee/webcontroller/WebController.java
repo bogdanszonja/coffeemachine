@@ -29,7 +29,6 @@ public class WebController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/plain; charset=UTF-8");
-        System.out.println("Post get in");
 
         String coffeeType = request.getParameter("coffeeType").toUpperCase();
         String customerName = request.getParameter("customerName");
