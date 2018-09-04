@@ -17,30 +17,29 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Deque;
 
-public class Admin {
 
-    @WebServlet(urlPatterns = {"/admin"})
-    public class WebController extends HttpServlet {
+@WebServlet(urlPatterns = {"/admin"})
+public class Admin extends HttpServlet {
 
-        @Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            response.setContentType("text/html; charset=UTF-8");
-            TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
-            WebContext context = new WebContext(request, response, request.getServletContext());
-            engine.process("index.html", context, response.getWriter());
-        }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
+        WebContext context = new WebContext(request, response, request.getServletContext());
+        engine.process("admin.html", context, response.getWriter());
+    }
 
-        @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-            response.setContentType("text/plain; charset=UTF-8");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/plain; charset=UTF-8");
 
-            Deque<Order> allOrder = SQLConnection.getAllOrders();
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("orders", allOrder);
+        Deque<Order> allOrder = SQLConnection.getAllOrders();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("orders", allOrder);
 
-            response.getWriter().write(jsonObject.toString());
-
-        }
+        response.getWriter().write(jsonObject.toString());
 
     }
+
 }
+
