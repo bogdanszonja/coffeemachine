@@ -13,7 +13,18 @@ public class Barista {
         orders.add(order);
     }
 
-    public void maintainCoffeMachine(){}
+    public void maintainCoffeeMachine(Trouble trouble) {
 
-    public void brewCoffe(){}
+        if (trouble == Trouble.NOT_ENOUGH_COFFEE) {
+            CoffeeMachine.getInstance().refillCoffeeBean();
+        } else if (trouble == Trouble.NOT_ENOUGH_WATER) {
+            CoffeeMachine.getInstance().refillWater();
+        } else if (trouble == Trouble.TRASH_IS_FULL) {
+            CoffeeMachine.getInstance().emptyGrounds();
+        }
+    }
+
+    public void brewCoffee() {
+
+    }
 }
