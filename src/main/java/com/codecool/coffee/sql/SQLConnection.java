@@ -123,4 +123,40 @@ public class SQLConnection {
             }
         }
     }
+
+    public static Order getPriorityOrder(){
+        Connection conn = getConn();
+        PreparedStatement ps = null;
+        String query = "SELECT id, costumer_name, costumer_room, coffe_type, order_time FROM orders " +
+                       "WHERE completed = false " +
+                       "ORDER BY order_time " +
+                       "LIMIT 1";
+        try {
+            ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            int id = rs.getInt("id");
+            String costumerName = rs.getString("costumer_name");
+            Coffee coffeeType = Coffee.valueOf(rs.getString("coffe_type"));
+            Date orderTime = new Date(rs.getTimestamp("order_time").getTime());
+            Room costumerRoom = Room.valueOf(rs.getString("costumer_room"));
+            Order priorityOrder = new Order(id, costumerName, coffeeType, orderTime, costumerRoom);
+            return priorityOrder;
+        } catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            try{
+                if(ps!=null)
+                    ps.close();
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 }
