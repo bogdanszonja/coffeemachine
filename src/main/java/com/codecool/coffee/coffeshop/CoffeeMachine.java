@@ -11,13 +11,16 @@ public class CoffeeMachine {
     private int waterLevel;
     private int coffeeBeanLevel;
     private int remainingGroundLevel;
-    private int maxWaterLevel = 100;
-    private int maxBeanLevel = 100;
-    private int groundsCapacity = 100;
+    private final int maxWaterLevel = 1200;
+    private final int maxBeanLevel = 200;
+    private final int groundsCapacity = 250;
 
     private static final CoffeeMachine instance = new CoffeeMachine();
 
     private CoffeeMachine() {
+        waterLevel = maxWaterLevel;
+        coffeeBeanLevel = maxBeanLevel;
+        remainingGroundLevel = groundsCapacity;
     }
 
     public static CoffeeMachine getInstance() {

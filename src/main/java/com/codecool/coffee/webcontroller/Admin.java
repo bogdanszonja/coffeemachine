@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import javax.activity.InvalidActivityException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -70,9 +71,9 @@ public class Admin extends HttpServlet {
                 Barista.getInstance().brewCoffee(id);
                 jsonObject.put("success", true);
 
-            } catch (Exception e) {
+            } catch (InvalidActivityException e) {
                 jsonObject.put("success", false);
-                System.out.println("Can't prepare this order.");
+                jsonObject.put("message", "Maintain coffe machine before making the order");
             }
             response.getWriter().write(jsonObject.toString());
         }
