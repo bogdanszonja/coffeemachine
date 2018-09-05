@@ -48,25 +48,23 @@ public class Admin extends HttpServlet {
         }
 
         JSONObject requestJSONObject = new JSONObject(jb.toString());
+        JSONObject jsonObject = new JSONObject();
 
         String action = requestJSONObject.getString("action");
         if (action.equals("get_orders")) {
             Deque<Order> allOrder = SQLConnection.getAllOrders();
-            JSONObject jsonObject = new JSONObject();
+
             jsonObject.put("orders", allOrder);
-            response.getWriter().write(jsonObject.toString());
+
         } else if (action.equals("get_coffeemachine_levels")) {
             int waterLevel = CoffeeMachine.getInstance().getWaterLevel();
             int beanLevel = CoffeeMachine.getInstance().getCoffeeBeanLevel();
             int groundLevel = CoffeeMachine.getInstance().getRemainingGroundLevel();
-            JSONObject jsonObject = new JSONObject();
             jsonObject.put("water", waterLevel);
             jsonObject.put("bean", beanLevel);
             jsonObject.put("ground", groundLevel);
-            response.getWriter().write(jsonObject.toString());
         } else if (action.equals("make_order")) {
             int id = requestJSONObject.getInt("order_id");
-            JSONObject jsonObject = new JSONObject();
             try {
                 Barista.getInstance().brewCoffee(id);
                 jsonObject.put("success", true);
@@ -75,9 +73,11 @@ public class Admin extends HttpServlet {
                 jsonObject.put("success", false);
                 jsonObject.put("message", "Maintain coffe machine before making the order");
             }
-            response.getWriter().write(jsonObject.toString());
+        } else if(action.equals("maintain")) {
+            Barista.getInstance().maintainCoffeeMachine(Trouble.valueOf(requestJSONObject.getString("message")));
+            jsonObject.put("success", true);
         }
-
+        response.getWriter().write(jsonObject.toString());
     }
 }
 
