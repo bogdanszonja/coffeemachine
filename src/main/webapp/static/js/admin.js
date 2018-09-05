@@ -10,7 +10,7 @@ $('#make-order').click(function () {
 
 $('.maintain button').click(function () {
     event.preventDefault();
-    console.log($(this).attr('id'));
+    maintain($(this).attr('id'));
 });
 
 var current_order_id;
@@ -47,7 +47,7 @@ var fillOrdersTable = function () {
             for (var i in tableData['orders']){
                 var order = tableData['orders'];
                 var tr = '';
-                tr += '<tr><td>' + order[i].id + '</td><td>' + order[i].customerName + '</td><td>' + order[i].customerRoom + '</td><td>' + order[i].orderTime + '</td></tr>'
+                tr += '<tr><td>' + i + '</td><td>' + order[i].customerName + '</td><td>' + order[i].customerRoom + '</td><td>' + order[i].coffeeType + '</td><td>' + order[i].orderTime + '</td></tr>'
                 $('.orders-table').append(tr);
             }
         }
