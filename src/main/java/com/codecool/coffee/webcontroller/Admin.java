@@ -1,9 +1,6 @@
 package com.codecool.coffee.webcontroller;
 
-import com.codecool.coffee.coffeshop.Coffee;
-import com.codecool.coffee.coffeshop.CoffeeMachine;
-import com.codecool.coffee.coffeshop.Order;
-import com.codecool.coffee.coffeshop.Room;
+import com.codecool.coffee.coffeshop.*;
 import com.codecool.coffee.sql.SQLConnection;
 import netscape.javascript.JSObject;
 import org.json.HTTP;
@@ -49,10 +46,10 @@ public class Admin extends HttpServlet {
             e.printStackTrace();
         }
 
-        JSONObject requestJSONObject =  new JSONObject(jb.toString());
+        JSONObject requestJSONObject = new JSONObject(jb.toString());
 
         String action = requestJSONObject.getString("action");
-        if(action.equals("get_orders")) {
+        if (action.equals("get_orders")) {
             Deque<Order> allOrder = SQLConnection.getAllOrders();
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("orders", allOrder);
@@ -66,8 +63,20 @@ public class Admin extends HttpServlet {
             jsonObject.put("bean", beanLevel);
             jsonObject.put("ground", groundLevel);
             response.getWriter().write(jsonObject.toString());
-        }
-    }
+        } else if (action.equals("make_order")) {
+            int id = requestJSONObject.getInt("id");
+            JSONObject jsonObject = new JSONObject();
+            try {
+                Barista.getInstance().brewCoffee(id);
+                jsonObject.put("success", true);
 
+            } catch (Exception e) {
+                jsonObject.put("success", false);
+                System.out.println("Can't prepare this order.");
+            }
+            response.getWriter().write(jsonObject.toString());
+        }
+
+    }
 }
 
