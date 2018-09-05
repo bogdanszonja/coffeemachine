@@ -17,6 +17,7 @@ public final class Barista {
     private Order currentOrder;
 
     private Deque<Order> orders = new ArrayDeque<>();
+    private CoffeeMachine coffeeMachine = CoffeeMachine.getInstance();
 
     public static Barista getInstance() {
         if (instance == null) {
@@ -36,19 +37,25 @@ public final class Barista {
     public void maintainCoffeeMachine(Trouble trouble) {
         logger.debug("maintainCoffeeMachine method called with Trouble type: {}.", trouble);
         if (trouble == Trouble.NOT_ENOUGH_COFFEE) {
-            CoffeeMachine.getInstance().refillCoffeeBean();
+            coffeeMachine.refillCoffeeBean();
         } else if (trouble == Trouble.NOT_ENOUGH_WATER) {
-            CoffeeMachine.getInstance().refillWater();
+            coffeeMachine.refillWater();
         } else if (trouble == Trouble.TRASH_IS_FULL) {
-            CoffeeMachine.getInstance().emptyGrounds();
+            coffeeMachine.emptyGrounds();
         }
     }
 
     public void brewCoffee(int id) throws InvalidActivityException{
         preparePriorityOrder();
-        if(id == currentOrder.getId()) {
-            CoffeeMachine.getInstance().make(currentOrder.getCoffeeType());
-            SQLConnection.markOrderAsCompleted(currentOrder);
+        int waterRequired = currentOrder.getCoffeeType().getRequiredWater();
+        int beanRequired = currentOrder.getCoffeeType().getRequiredCoffeeBean();
+        int groundMade = currentOrder.getCoffeeType().getGroundMade();
+        if(coffeeMachine.getWaterLevel() - waterRequired >= 0 && coffeeMachine.getCoffeeBeanLevel() - beanRequired >= 0
+                && coffeeMachine.getRemainingGroundLevel() - groundMade >= 0) {
+            if(id == currentOrder.getId()) {
+                coffeeMachine.make(currentOrder.getCoffeeType());
+                SQLConnection.markOrderAsCompleted(currentOrder);
+            }
         } else {
             throw new InvalidActivityException();
         }
