@@ -6,21 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Coffee Machine</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" defer></script>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" defer></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous" defer></script>
     <script src="/static/js/index.js" defer></script>
 </head>
 <body>
-    <button id="espresso">Espresso</button>
-    <button id="long">Long</button>
-    <button id="doppio">Doppio</button>
-    <button id="americano">Americano</button>
-    <form id="customerForm" action="/" method="post">
-        <label for="customerName">Your name</label><br>
-        <input id="customerName" type="text" name="customerName">
-        <label for="customerRoom">Your room</label>
-        <input id="customerRoom" type="text" name="customerRoom">
-    </form>
+    <div class="title">
+        <div class="title-table">
+            <span>Coffee Machine</span>
+        </div>
+    </div>
+    <div class="content-wrapper">
+        <div class="blur">
+        </div>
+        <div class="content">
+            <img class="coffee-machine" src="/static/assets/coffee-machine.png">
+            <div class="coffee-machine-screen">
+                <div class="coffee-selector-wrapper">
+                    <button id="espresso"></button>
+                    <button id="long"></button>
+                    <button id="doppio"></button>
+                    <button id="americano"><img src="/static/assets/americano.jpg"></button>
+                </div>
+                <div class="room-selector-wrapper">
+                    <button id="RED"></button>
+                    <button id="GREEN"></button>
+                    <button id="WHITE"></button>
+                    <button id="BLUE"></button>
+                </div>
+                <div class="customer-name-wrapper">
+                    <form id="customerForm" action="/" method="post">
+                        <label for="customerName">Your name</label><br>
+                        <input id="customerName" type="text" name="customerName">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

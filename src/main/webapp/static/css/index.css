@@ -1,0 +1,128 @@
+body {
+    width: 100%;
+    background: url("../assets/background.jpg") no-repeat;
+    background-size: cover;
+}
+
+.title {
+    display: none;
+}
+
+.title-table {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    display: table
+}
+
+.title span {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 100px;
+    text-shadow: 0px 0px 4px #000000, 0px 0px 4px #000000, 0px 0px 16px #000000, 0px 0px 8px #000000, 0px 0px 16px #000000, 0px 0px 16px #000000;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+.content-wrapper {
+    display: none;
+}
+
+.blur {
+    position: absolute;
+    background: url("../assets/background.jpg") no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    -webkit-filter: blur(4px);
+    -moz-filter: blur(4px);
+    -o-filter: blur(4px);
+    -ms-filter: blur(4px);
+    filter: blur(4px);
+}
+
+.coffee-machine-buttons img {
+    width: 400px;
+}
+.content {
+    margin: auto;
+    position: relative;
+    width: 100vh;
+}
+
+.content .coffee-machine {
+    margin-top: 5vh;
+    width: 95vh;
+    z-index: -1;
+}
+
+.coffee-machine-screen {
+    background: black;
+    position: absolute;
+    width: 37vh;
+    height: 26vh;
+    top: 11vh;
+    left: 28vh;
+}
+
+.coffee-machine-screen div {
+    position: relative;
+}
+
+.coffee-selector-wrapper button {
+    position: absolute;
+    border: none;
+}
+
+.coffee-selector-wrapper button:hover {
+    border: 1px solid red;
+}
+
+.coffee-selector-wrapper #espresso {
+    top: 3.5vh;
+    left: 2.3vh;
+    width: 15vh;
+    height: 8vh;
+    background: url("../assets/espresso.jpg") no-repeat;
+    background-size: contain;
+}
+
+.coffee-selector-wrapper #long {
+    top: 14vh;
+    left: 2.3vh;
+    width: 15vh;
+    height: 8vh;
+    background: url("../assets/long.jpg") no-repeat;
+    background-size: contain;
+}
+
+
+.coffee-selector-wrapper #doppio{
+    top: 3.5vh;
+    right: 2.3vh;
+    width: 15vh;
+    height: 8vh;
+    background: url("../assets/doppio.jpg") no-repeat;
+    background-size: contain;
+}
+
+.coffee-selector-wrapper #americano {
+    top: 14vh;
+    right: 2.3vh;
+    width: 15vh;
+    height: 8vh;
+    background: url("../assets/americano.jpg") no-repeat;
+    background-size: contain;
+}
+
+
+.room-selector-wrapper {
+    display: none;
+}
+
+.customer-name-wrapper {
+    display: none;
+}
