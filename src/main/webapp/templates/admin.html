@@ -13,18 +13,24 @@
     <script src="/static/js/admin.js" defer></script>
 </head>
 <body>
+    <button id="make-order">
+        Make order!
+    </button>
     <div class="orders">
         <table class="orders-table">
 
         </table>
     </div>
     <div class="coffee_machine">
-        <table class="coffee_machine_levels">
-            <tr>
-                <td>Water Level</td>
-                <td>Coffee Bean Level</td>
-                <td>Remaining Ground Level</td>
-            </tr>
+        <table>
+            <thead>
+                <th>Water Level</th>
+                <th>Coffee Bean Level</th>
+                <th>Remaining Ground Level</th>
+            </thead>
+            <tbody class="coffee_machine_levels">
+
+            </tbody>
         </table>
     </div>
 
