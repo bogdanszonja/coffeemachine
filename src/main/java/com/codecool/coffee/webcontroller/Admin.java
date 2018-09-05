@@ -64,7 +64,7 @@ public class Admin extends HttpServlet {
             jsonObject.put("ground", groundLevel);
             response.getWriter().write(jsonObject.toString());
         } else if (action.equals("make_order")) {
-            int id = requestJSONObject.getInt("id");
+            int id = requestJSONObject.getInt("order_id");
             JSONObject jsonObject = new JSONObject();
             try {
                 Barista.getInstance().brewCoffee(id);

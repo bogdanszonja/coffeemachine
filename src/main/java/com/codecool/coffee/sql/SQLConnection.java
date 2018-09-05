@@ -139,6 +139,7 @@ public class SQLConnection {
         try {
             ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
+            rs.next();
             int id = rs.getInt("id");
             String costumerName = rs.getString("costumer_name");
             Coffee coffeeType = Coffee.valueOf(rs.getString("coffe_type"));
