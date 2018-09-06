@@ -12,6 +12,15 @@ import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.Deque;
 
+/**
+ * SQLConnection class creates connection with the PostgreSQL database
+ * using JDBC framework.
+ * It includes the necessary queries while preventing SQL injection.
+ *
+ * @author  Szabó Anita, Kiszely Milán, Bogdán Szonja
+ * @version 1.0
+ * @since   2018-09-05
+ */
 public class SQLConnection {
     private static final Logger logger = LoggerFactory.getLogger(SQLConnection.class);
 
@@ -20,6 +29,11 @@ public class SQLConnection {
     private static final String USER = System.getenv("db_user");
     private static final String PASS = System.getenv("db_password");
 
+    /**
+     * Getter method for the connection.
+     *
+     * @return Connection.
+     */
     private static Connection getConn(){
         Connection conn = null;
         try {
@@ -32,6 +46,11 @@ public class SQLConnection {
         return conn;
     }
 
+    /**
+     * Adds a new order to the database.
+     *
+     * @param order
+     */
     public static void addNewOrder(Order order){
         Connection conn = getConn();
         PreparedStatement ps = null;
@@ -63,6 +82,11 @@ public class SQLConnection {
         }
     }
 
+    /**
+     * Returns all of the orders from the database ordered by date.
+     *
+     * @return Deque containing orders.
+     * */
     public static Deque<Order> getAllOrders(){
         Connection conn = getConn();
         PreparedStatement ps = null;
@@ -99,10 +123,11 @@ public class SQLConnection {
         return null;
     }
 
-    public static void markOrderAsCompleted(Order order){
-        markOrderAsCompleted(order.getId());
-    }
-
+    /**
+     * Marks and order as completed based on it's id.
+     *
+     * @param id
+     */
     public static void markOrderAsCompleted(int id){
         Connection conn = getConn();
         PreparedStatement ps = null;
@@ -129,6 +154,20 @@ public class SQLConnection {
         }
     }
 
+    /**
+     * Marks and order as completed.
+     *
+     * @param order
+     */
+    public static void markOrderAsCompleted(Order order){
+        markOrderAsCompleted(order.getId());
+    }
+
+    /**
+     * Getter method for the oldest order in the database which is not completed.
+     *
+     * @return Order.
+     */
     public static Order getPriorityOrder(){
         Connection conn = getConn();
         PreparedStatement ps = null;
