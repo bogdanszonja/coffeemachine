@@ -25,7 +25,7 @@ public class CoffeeMachine {
     private static final CoffeeMachine instance = new CoffeeMachine();
 
     /**
-     * Class constructor.
+     * Private class constructor.
      */
     private CoffeeMachine() {
         waterLevel = maxWaterLevel;
@@ -33,6 +33,10 @@ public class CoffeeMachine {
         remainingGroundLevel = groundsCapacity;
     }
 
+    /**
+     *
+     * @return CoffeeMachine instance.
+     */
     public static CoffeeMachine getInstance() {
         return instance;
     }
