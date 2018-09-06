@@ -8,7 +8,14 @@ import javax.activity.InvalidActivityException;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-
+/**
+ * The Barista singleton knows about all of the orders.
+ * It is capable of maintain the coffee machine and brew coffee.
+ *
+ * @author  Szabó Anita, Kiszely Milán, Bogdán Szonja
+ * @version 1.0
+ * @since   2018-09-05
+ */
 public final class Barista {
 
     private static final Logger logger = LoggerFactory.getLogger(Barista.class);
@@ -19,6 +26,16 @@ public final class Barista {
     private Deque<Order> orders = new ArrayDeque<>();
     private CoffeeMachine coffeeMachine = CoffeeMachine.getInstance();
 
+    /**
+     * Private class constructor.
+     */
+    private Barista() {
+    }
+
+    /**
+     *
+     * @return Barista instance
+     */
     public static Barista getInstance() {
         if (instance == null) {
             instance = new Barista();
@@ -26,14 +43,18 @@ public final class Barista {
         return instance;
     }
 
+    /**
+     * Sets the currentOrder with the oldest order from the database.
+     */
     private void preparePriorityOrder() {
         currentOrder = SQLConnection.getPriorityOrder();
     }
 
-    public void addNewOrder(Order order){
-        orders.add(order);
-    }
-
+    /**
+     * Maintains the coffee machine based on the kind of trouble it has.
+     *
+     * @param trouble
+     */
     public void maintainCoffeeMachine(Trouble trouble) {
         logger.debug("maintainCoffeeMachine method called with Trouble type: {}.", trouble);
         if (trouble == Trouble.NOT_ENOUGH_COFFEE) {
@@ -45,6 +66,14 @@ public final class Barista {
         }
     }
 
+    /**
+     * Checks if the given id from the database is equal to the current order.
+     * If it is true, it brews the coffee.
+     * If it is false, it throws an exception.
+     *
+     * @param id
+     * @throws InvalidActivityException
+     */
     public void brewCoffee(int id) throws InvalidActivityException{
         preparePriorityOrder();
         int waterRequired = currentOrder.getCoffeeType().getRequiredWater();
