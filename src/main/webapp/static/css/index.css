@@ -123,6 +123,142 @@ body {
     display: none;
 }
 
+.room-selector-wrapper button {
+    position: absolute;
+    width: 18.5vh;
+    height: 13vh;
+    border: none;
+}
+
+.room-selector-wrapper button:hover {
+    border: 1px solid yellow;
+}
+
+.room-selector-wrapper #red {
+    top: 0;
+    left: 0;
+    background: red;
+    color: white;
+}
+
+.room-selector-wrapper #green {
+    top: 0;
+    right: 0;
+    background: green;
+    color: white;
+}
+
+.room-selector-wrapper #white {
+    top: 13vh;
+    left: 0;
+    background: white;
+    color: black;
+}
+
+.room-selector-wrapper #blue {
+    top: 13vh;
+    right: 0;
+    background: blue;
+    color: white;
+}
+
 .customer-name-wrapper {
     display: none;
 }
+
+.customer-name-wrapper #customerForm {
+    position: relative;
+    background: saddlebrown;
+    width: 37vh;
+    height: 26vh;
+}
+
+.customer-name-wrapper label {
+    position: absolute;
+    top: 6vh;
+    left: 2vh;
+    color: white;
+    transition: top ease-in-out 0.3s, font-size ease-in-out 0.3s;
+    z-index: 1;
+}
+
+.customer-name-wrapper #customerName {
+    background: none;
+    border: none;
+    border-bottom: 2px solid white;
+    width: 33vh;
+    margin-left: 2vh;
+    position: absolute;
+    top: 6vh;
+    color: white;
+    z-index: 2;
+}
+
+.customer-name-wrapper #customerName:focus {
+    outline: none;
+}
+
+.customer-name-wrapper #customerName:focus ~ #customerNameLabel {
+    position: absolute;
+    font-size: smaller;
+    top: 3vh;
+}
+
+.customer-name-wrapper #submitForm{
+    font-size: larger;
+    color: saddlebrown;
+    background: white;
+    border: none;
+    position: absolute;
+    top: 13vh;
+    width: 33vh;
+    height: 6vh;
+    margin: 2vh;
+    font-weight: bolder;
+    transition: color ease-in-out 0.15s, background ease-in-out 0.15s, border ease-in-out 0.15s;
+}
+
+.customer-name-wrapper #submitForm:hover{
+    color: white;
+    background: saddlebrown;
+    border: 1px solid white;
+}
+
+.success {
+    display: none;
+    background: white;
+    width: 37vh;
+    height: 26vh;
+}
+
+.success img {
+    left: 1.8vh;
+    position: absolute;
+    height: 26vh;
+}
+.fill-coffee {
+    width: 21.1vh;
+    height: 16.7vh;
+    position: absolute;
+    top: 71.6vh;
+    left: 36.1vh;
+    background: #e7eced;
+}
+
+.coffee-flow {
+    position: absolute;
+    width: 1.7vh;
+    height: 3.5vh;
+    top: 65.4vh;
+    background: #90501f;
+    display: none;
+}
+
+.coffee-flow.flow1 {
+    left: 42.6vh;
+}
+
+.coffee-flow.flow2 {
+    left: 49.2vh;
+}
+
